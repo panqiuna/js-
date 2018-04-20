@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js继承</title>
+</head>
+<body>
+<div>
+    <!--
+    js继承总结：
+    - 原型链继承
+    1、子类B继承父类A中的所有的属性和方法(私有+公有)只需要让B.prototype=new A;即可；
+    * 特点：它是把父类中的私有的+公有的都继承到了子类原型上(子类共有的)
+    * 核心：原型继承并不是把父类中的属性和方法克隆一份一模一样的给B，而是让B和A之间增加了原型链的链接，以后B的实例n想要A中的getX的方法，需要一级一级的向上查找才能使用 (有层级关系)，
+    - call继承
+    call继承的原理：把父类私有的属性和方法 克隆一份一模一样的作为子类的私有的属性
+    - 冒充对象继承：
+    冒充对象继承：将父类公有的和父类私有的都给子类私有
+    - 混合式继承
+    原型继承+call继承
+    - 寄生式继承
+    将父类公有的继承到子类的公有的，父类私有的继承子类私有的
+    -中间式继承
+    将arguments继承数组实例上的
+
+    -->
+</div>
+<script>
+    var obj = {
+//        constructor:Fn,
+        getX: function () {
+        }
+    }
+    //克隆、
+    //  1
+    var obj1 = {};
+    for (var key in obj) {//克隆obj
+        if (obj.hasOwnProperty(key)) {
+            obj1[key] = obj[key]//将obj克隆到obj1上
+        }
+    }
+    //    2
+    //    var obj2=object.create(obj);//放在原型上了
+    /*
+     * object.create(proObj)创建一个新的对象，但是还要把proObj作为这个对象的原型 兼容ie9以上的
+     *
+     * */
+    //克隆对象
+    var obj = {
+        getX: function () {
+
+        }
+    };
+    function object(o) {
+        function Fn() {//创建一个类，让累的原型指向obj
+
+        }
+
+        Fn.prototype = o;//o=obj
+        return new Fn;//返回一个fn实例
+    }
+    var newObj=object(obj)//实例一个新的obj  newObj的原型指向
+
+</script>
+</body>
+</html>
+

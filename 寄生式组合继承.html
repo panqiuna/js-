@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5、寄生式组合继承</title>
+</head>
+<body>
+<script type="text/javascript">
+    function A() {
+        this.x = 23;
+    };
+    A.prototype.getX = function () {
+        console.log(this.x);//23
+    };
+    function B() {
+A.call(this)
+    }
+
+    //将A的原型作为B的原型
+    B.prototype = createObject(A.prototype);
+    B.prototype.constructor = B;
+    var n = new B;
+    console.dir(n);//B
+
+    //    兼容IE9一下的
+    function createObject(o) {
+        function fn() {
+        }
+
+        fn.prototype = o;
+        return new fn;//执行fn
+    }
+
+    /*
+     * 寄生式组合继承：将父类公有的继承到子类的公有的，父类私有的继承子类私有的
+     * */
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2、call继承</title>
+</head>
+<body>
+<script type="text/javascript">
+    function A() {//父类
+        this.x = 100;
+    }
+    A.prototype.getX = function () {//公有方法
+        console.log(this.x);
+    }
+
+    function B() {//子类
+        //B中的this是n(B的实例是n)
+        //执行A的方法修改A中的this
+        //A.call(n)的意思是:把A执行让A中的this变为了n
+        A.call(this);//B继承A
+    }
+    var n = new B;//创建一个B的实例
+    //执行
+    n.getX();
+    console.log(n.x);
+
+    /*
+     *把父类作为一个普通函数执行并且把当前的this替换成当前子类的实例(把父类私有的属性和方法给子类私有的属性)
+     *call继承的原理：把父类私有的属性和方法 克隆一份一模一样的作为子类的私有的属性
+     * */
+</script>
+</body>
+</html>

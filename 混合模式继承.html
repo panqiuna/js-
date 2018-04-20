@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.混合模式继承</title>
+</head>
+<body>
+<script type="text/javascript">
+    function A() {//父类私有
+        this.x = 200;
+    }
+    A.prototype.getX = function () {//父类公有
+        console.log(this.x);
+    }
+    function B() {//子类私有
+        A.call(this)
+    }
+    //在原型上增加方法 x=100;(将父类私有的和公有的都变成子类公有的方法)
+    B.prototype = new A;//将B的原型等于A的实例
+    B.prototype.constructor = B;
+    var n = new B;
+    n.getX();
+
+    /*
+     * 混合模式继承：原型继承+call继承
+     *
+     * */
+
+</script>
+</body>
+</html>
